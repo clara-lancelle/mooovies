@@ -1,0 +1,46 @@
+a.backBtn {
+  padding: 10px 1rem;
+  border: 1px solid $lightDuckBlue;
+  background-color: $lightDuckBlue;
+  color: white;
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 10px;
+  place-items: center;
+  width: 10rem;
+  margin: 0 auto;
+
+  &:hover {
+    cursor: pointer;
+
+    background-color: #ffffff;
+    color: $lightDuckBlue;
+  }
+
+  img.return {
+    height: 1.7rem;
+  }
+}
+
+.singleArticleBtn {
+  border-radius: 9px 0 9px 0;
+  padding: 1rem;
+  width: 10rem;
+  border: 1px solid grey;
+  display: block;
+  justify-self: center;
+  margin: 0.5rem;
+  transition-duration: 1s;
+
+  &:hover {
+    background-color: rgba(128, 128, 128, 0.387);
+  }
+}
+
+.btn {
+  background-color: $wine;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 5rem;
+  text-align: center;
+}

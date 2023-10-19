@@ -1,0 +1,25 @@
+main.home {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    margin-top: 7rem;
+    grid-auto-rows: 1fr 1fr;
+
+    .home__body {
+        display: grid;
+        text-align: justify;
+        width: 60%;
+        align-self: start;
+
+        h2 {
+            font-size: 1.5rem;
+            line-height: 3rem;
+            font-family: 'title', sans-serif;
+        }
+
+        h3 {
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+        }
+    }
+}
