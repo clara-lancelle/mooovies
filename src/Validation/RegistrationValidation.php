@@ -16,7 +16,11 @@ final class RegistrationValidation extends ValidationUtil
         //username
         if (!empty($data['username'])) {
             if (preg_match(ValidationUtil::$regex['username'], $data['username'])) {
-                $this->formValidData['username'] = $data['username'];
+                if (!UserQueries::isExistingUsername($data['username'])) {
+                    $this->formValidData['username'] = trim($data['username']);
+                } else {
+                    $this->formErrors['username'] = ValidationUtil::USERNAME_ERROR_ALREADY_TAKEN;
+                }
             } else {
                 $this->formErrors['username'] = ValidationUtil::USERNAME_ERROR_INVALID;
             }
@@ -25,7 +29,7 @@ final class RegistrationValidation extends ValidationUtil
         }
         //password
         if (!empty($data['password'])) {
-            if (preg_match(ValidationUtil::$regex['password'], $data['password'])) {
+            if (preg_match(ValidationUtil::$regex['password'], $data['password']) && !str_contains($data['password'], $data['username'])) {
                 if (!empty($data['confirmPassword']) && $data['confirmPassword'] === $data['password']) {
                     $this->formValidData['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
                 } else {

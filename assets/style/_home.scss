@@ -10,16 +10,12 @@ main.home {
         text-align: justify;
         width: 60%;
         align-self: start;
+        justify-content: center;
 
         h2 {
             font-size: 1.5rem;
             line-height: 3rem;
             font-family: 'title', sans-serif;
-        }
-
-        h3 {
-            font-size: 1.1rem;
-            line-height: 1.5rem;
         }
     }
 }

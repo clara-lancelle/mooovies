@@ -7,7 +7,6 @@ use Model\User;
 final class UserQueries extends Database
 {
 
-
     public static function isExistingUsername($username): int
     {
         $instance = new self;
@@ -16,11 +15,24 @@ final class UserQueries extends Database
             $queryPrepare = $instance->dbco->prepare($query);
             $queryPrepare->bindValue(':username', $username, \PDO::PARAM_STR);
             $queryPrepare->execute();
-
+            return $queryPrepare->fetch(\PDO::FETCH_COLUMN);
         } catch (\PDOException $e) {
             die($e->getMessage());
         }
-        return $queryPrepare->fetch(\PDO::FETCH_COLUMN);
+    }
+
+    public static function getUserId($username): int
+    {
+        $instance = new self;
+        try {
+            $query = 'SELECT id FROM `user` WHERE username = :username';
+            $queryPrepare = $instance->dbco->prepare($query);
+            $queryPrepare->bindValue(':username', $username, \PDO::PARAM_STR);
+            $queryPrepare->execute();
+            return $queryPrepare->fetch(\PDO::FETCH_COLUMN);
+        } catch (\PDOException $e) {
+            die($e->getMessage());
+        }
     }
 
     public static function CanLogin(string $username, string $pass)
@@ -40,11 +52,11 @@ final class UserQueries extends Database
 
     //Insert 
 
-    public static function insertUser(User $user): void
+    public static function registerUser(User $user): void
     {
         try {
             $instance = new self;
-            $query = 'INSERT INTO user (`username`,`password`,`phoneNumber`)
+            $query = 'INSERT INTO user (`username`,`password`)
         VALUES (:username, :password)';
 
             $queryPrepare = $instance->dbco->prepare($query);

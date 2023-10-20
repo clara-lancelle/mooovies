@@ -23,9 +23,10 @@ class User
         return $this->username;
     }
 
-    public function setUsername(string $username)
+    public function setUsername(string $username): self
     {
         $this->username = $username;
+        return $this;
     }
 
     public function getPassword(): string
@@ -33,8 +34,9 @@ class User
         return $this->password;
     }
 
-    public function setPassword(string $password)
+    public function setPassword(string $password): self
     {
         $this->password = $password;
+        return $this;
     }
 }

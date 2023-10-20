@@ -8,6 +8,10 @@ use Model\User;
 
 class UserController
 {
+    public function __invoke()
+    {
+        $this->login();
+    }
     public function login()
     {
         $formErrors = [];
@@ -16,10 +20,10 @@ class UserController
                 $loginValidation = new LoginValidation();
                 $formErrors = $loginValidation->validate($_POST);
                 if (count($formErrors) === 0) {
-                    $user = new User();
-                    $user->setUsername($_POST['username']);
-                    $_SESSION['user'] = $user;
-                    header("location: /home");
+                    $user = (new User())->setUsername($_POST['username']);
+                    $_SESSION['user'] = $user->getUsername();
+                    $_SESSION['id'] = UserQueries::getUserId($_SESSION['user']);
+                    header("location: /movie/dashboard");
                 }
             }
         }
@@ -35,32 +39,29 @@ class UserController
             if (count($_POST) > 0) {
                 $registrationValidation = new RegistrationValidation();
                 $formErrors = $registrationValidation->validate($_POST);
-                var_dump($formErrors);
-                die;
                 if (count($formErrors) === 0) {
+                    $validData = $registrationValidation->getFormValidData();
                     $user = new User();
-                    $user->setUsername($_POST['username']);
-                    $_SESSION['user'] = $user;
-                    header("location: /home");
+                    $user->setUsername($validData['username'])->setPassword($validData['password']);
+                    UserQueries::registerUser($user);
+                    $_SESSION['user'] = $user->getUsername();
+                    $_SESSION['id'] = UserQueries::getUserId($_SESSION['user']);
+                    header("location: /movie/dashboard");
                 }
             }
         }
         $title = 'Registration';
-        include(__DIR__ . '/../user/register.php');
+        include(__DIR__ . '/../view/register.php');
         return $formErrors;
     }
 
     public function logout()
     {
-        if (isset($_SESSION['username']) && isset($_POST['logout'])) {
+        if (isset($_SESSION['user'])) {
             session_destroy();
             unset($_SESSION['user']);
-            $title = 'Home';
-            header("location: /home");
-        } else {
-            $title = 'Home';
-            header("location: /home");
         }
-
+        $title = 'Home';
+        header("location: /home");
     }
 }

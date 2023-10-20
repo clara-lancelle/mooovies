@@ -1,5 +1,5 @@
 <?php
-
+require 'includes/sessionStart.php';
 require 'autoloader.php';
 
 $controller = 'home';

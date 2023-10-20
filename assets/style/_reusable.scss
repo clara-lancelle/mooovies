@@ -1,12 +1,8 @@
 * {
     font-family: sans-serif;
-    color: $dark_grey;
+    color: $text;
     font-size: 1rem;
     margin: 0;
-
-    @include x_smallScreen {
-        font-size: .9rem;
-    }
 }
 
 body {
@@ -27,32 +23,23 @@ body.small {
 main {
     margin-top: 78px;
 
-    @include x_smallScreen() {
-        margin-top: 67px;
-    }
-
     &.small {
         height: 85vh;
     }
 }
 
 section {
-    display: grid; 
+    display: grid;
     margin: 2% 10%;
     place-items: center;
-    @include smallScreen() {
-        margin: 2% 5%;
-    }
-    @include x_smallScreen() {
-        margin: 1%;
-    }
+
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-li{
+li {
     list-style: none;
 }
 
@@ -61,7 +48,8 @@ h1 {
     text-align: start;
 
     &.errorPage {
-        color: #479f73;;
+        color: #479f73;
+        ;
         padding: 1rem;
         font-size: 1.8rem;
     }
@@ -79,15 +67,31 @@ h2 {
         padding: 4rem 0 9rem;
     }
 }
+
 h3 {
-    color: $dark_grey;
+    color: $text;
     font-weight: 300;
 }
-  
+
 h4 {
-    color: $dark_grey;
+    color: $text;
 }
 
 .text-center {
     text-align: center;
+}
+
+.error {
+    padding: 5px 0;
+    color: #af3030;
+}
+
+.success_message {
+    line-height: 3rem;
+    background-color: #59c178;
+    text-align: center;
+    color: white;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid $success;
 }

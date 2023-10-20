@@ -13,7 +13,6 @@ final class LoginValidation extends ValidationUtil
     {
 
         if (!empty($data['username']) && !empty($data['password'])) {
-            var_dump(UserQueries::CanLogin($data['username'], $data['password']));
             (UserQueries::isExistingUsername($data['username']) && UserQueries::CanLogin($data['username'], $data['password'])) ?: $this->formErrors['login'] = ValidationUtil::INCORRECT_LOGIN_VALUES;
         } else {
             $this->formErrors['login'] = ValidationUtil::EMPTY_FIELDS;

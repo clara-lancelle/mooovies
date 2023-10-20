@@ -2,6 +2,9 @@ RewriteEngine On
 
 RewriteBase /
 
-RewriteRule ^(.*)$ index.php?params=$1 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
 
 ErrorDocument 404 /views/errors/page404.php
+
+RewriteRule ^(.*)$ index.php?params=$1 [L,QSA]

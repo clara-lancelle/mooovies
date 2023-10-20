@@ -5,7 +5,7 @@
     </h2>
     <section class="articles">
         <article class="article single">
-            <div class="article__inner">
+            <div class="article__inner single">
                 <div class="article__inner__header single">
                     <p>
                         Release year :
@@ -19,7 +19,7 @@
                         Production company :
                         <?= $arrayMovie['production_company'] ?>
                     </p>
-                    <p>
+                    <p class="btn tag">
                         Category :
                         <?= $arrayMovie['category'] ?>
                     </p>
@@ -34,8 +34,12 @@
                         <?= $arrayMovie['synopsis'] ?>
                     </p>
                 </div>
-                <?php if ($arrayMovie['isAuthor']): ?>
-                    <a href="/movie/editMovie?movieId=<?= $movie['id'] ?>">Edit</a>
+
+                <?php if (isset($_SESSION['id']) && $_SESSION['id'] === $arrayMovie['author_id']): ?>
+                    <a href="/movie/editMovie?movieId=<?= $arrayMovie['id'] ?>">Edit</a>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['id']) && $_SESSION['id'] === $arrayMovie['author_id']): ?>
+                    <a class="btn btn--danger" href="/movie/deleteMovie?movieId=<?= $arrayMovie['id'] ?>&author_id=<?= $arrayMovie['author_id'] ?>">! Delete !</a>
                 <?php endif; ?>
             </article>
         </section>
